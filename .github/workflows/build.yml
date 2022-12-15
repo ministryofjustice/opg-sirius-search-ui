@@ -1,4 +1,4 @@
-name: Test
+name: Test and tag
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ defaults:
     shell: bash
 
 jobs:
-  cypress-run:
+  cypress:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,6 +34,28 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
+  codeql:
+    runs-on: ubuntu-latest
+
+    permissions:
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+
+  tag:
+    needs: [cypress, codeql]
+    runs-on: ubuntu-latest
+    steps:
       - name: Extract branch name
         run: |
           if [ "${{ github.head_ref }}" == "" ]; then
