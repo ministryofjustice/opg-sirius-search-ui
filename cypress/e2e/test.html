@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test document</title>
+    <link rel="stylesheet" href="../../dist/search.css" />
+    <script src="../../dist/search.js"></script>
+  </head>
+  <body>
+    <form>
+      <label for="searchKeyword" class="govuk-visually-hidden"> Search </label>
+      <input
+        data-module="sirius-search-preview"
+        id="searchKeyword"
+        placeholder="Search..."
+        type="search"
+      />
+      <button type="submit">Search</button>
+    </form>
+
+    <div
+      style="
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 25%;
+        height: 15px;
+        background-color: lightgray;
+      "
+      id="floating-box"
+    ></div>
+  </body>
+</html>

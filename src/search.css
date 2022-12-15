@@ -1,0 +1,33 @@
+.sirius-search {
+  position: absolute;
+  background-color: #f3f2f1;
+  box-shadow: 0 5px 5px #b1b4b6;
+  z-index: 100;
+}
+
+.sirius-search__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sirius-search__item {
+  padding: 0.625rem 0.875rem;
+  background-color: white;
+}
+
+.sirius-search__item + .sirius-search__item,
+.sirius-search__item--summary {
+  margin-top: 0.5rem;
+}
+
+.sirius-search__link {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.sirius-search .govuk-summary-list,
+.sirius-seach .govuk-body,
+.sirius-seach .govuk-link {
+  font-size: 1rem;
+}

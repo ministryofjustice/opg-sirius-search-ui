@@ -1,0 +1,21 @@
+{
+  "name": "opg-sirius-search-ui",
+  "version": "0.1.0",
+  "main": "src/main.js",
+  "repository": "git@github.com:ministryofjustice/opg-sirius-search-ui.git",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:js && yarn build:css",
+    "build:js": "esbuild --bundle src/main.js --minify --outfile=dist/search.js --sourcemap --resolve-extensions=.mjs,.js",
+    "build:css": "cp ./src/search.css ./dist/search.css",
+    "test": "yarn build && cypress open",
+    "prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "cypress": "^12.1.0",
+    "esbuild": "^0.16.6"
+  },
+  "peerDependencies": {
+    "govuk-frontend": "^4.4.0"
+  }
+}
