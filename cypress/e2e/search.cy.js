@@ -51,6 +51,12 @@ describe('Search component', () => {
             cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
             cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
         });
+
+        it('Links to search results page', () => {
+            search('Giusto', 'single.json');
+
+            cy.contains('.sirius-search__item--summary', 'View all').should("have.attr", "href").should("contain", "/lpa/frontend/search?term=Giusto");
+        });
     });
 
     describe('No results', () => {
@@ -58,12 +64,6 @@ describe('Search component', () => {
             search('Giusto', 'none.json');
 
             cy.contains('.sirius-search__item', 'No cases were found.');
-        });
-
-        it('Links to search results page', () => {
-            search('Giusto', 'none.json');
-
-            cy.contains('.sirius-search__item--summary', 'View all').should("have.attr", "href").should("contain", "/lpa/frontend/search?term=Giusto");
         });
 
         it('Searches for deleted cases if UID searched for', () => {
