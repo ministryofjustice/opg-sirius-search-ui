@@ -1,12 +1,7 @@
 function getXsrfToken() {
-  const cookies = document.cookie.split(";").reduce((agg, str) => {
-    const pair = str.split("=");
-    return {
-      ...agg,
-      [pair[0].trim()]: decodeURIComponent(pair[1]),
-    };
-  }, {});
-  return cookies["XSRF-TOKEN"];
+  const match = document.cookie.match(/XSRF-TOKEN=([^;]+)/);
+
+  return match ? decodeURIComponent(match[1]) : "";
 }
 
 const defaultFetchOptions = {

@@ -1,5 +1,5 @@
 import { query, queryDeletedCases } from "./lib/api";
-import { escapeHTML, formatAddress, formatStatus } from "./lib/format";
+import { escapeHTML, formatAddress, statusColour } from "./lib/format";
 
 const CLASSES = {
   container: "sirius-search",
@@ -103,15 +103,15 @@ SearchResults.prototype.search = async function search() {
                       Deleted on ${Intl.DateTimeFormat().format(
                         deletionDate
                       )} because ${caseItem.deletionReason} (was ${
-        caseItem.status
-      })
+      caseItem.status
+    })
                   </p>
                   <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                       <div class="govuk-summary-list__row">
                           <dt class="govuk-summary-list__key govuk-!-padding-1">Status:</dt>
-                          <dd class="govuk-summary-list__value govuk-!-padding-1">${formatStatus(
-                            "Deleted"
-                          )}</dd>
+                          <strong class="govuk-tag govuk-tag--red">
+                            Deleted
+                          </strong>
                       </div>
                   </dl>
               </li>
@@ -159,8 +159,8 @@ SearchResults.prototype.search = async function search() {
                 <li class="${CLASSES.item}">
                     <strong>
                       ${escapeHTML(result.firstname)} ${escapeHTML(
-                        result.surname
-                      )} [${result.personType}]
+              result.surname
+            )} [${result.personType}]
                     </strong>
                     <p class="${CLASSES.link}">
                         <a class="govuk-link" href="/lpa/person/${result.id}/${
@@ -192,9 +192,13 @@ SearchResults.prototype.search = async function search() {
                             ? `
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key govuk-!-padding-1">Status:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-1">${formatStatus(
-                              result.case.status
-                            )}</dd>
+                            <dd class="govuk-summary-list__value govuk-!-padding-1">
+                              <strong class="govuk-tag govuk-tag--${statusColour(
+                                result.case.status
+                              )}">
+                                ${result.case.status}
+                              </strong>
+                            </dd>
                         </div>
                         `
                             : ""
@@ -259,11 +263,15 @@ SearchResults.prototype.resizeContainer = function resizeContainer() {
 document.addEventListener("submit", async (e) => {
   const $form = e.target;
 
-  if (!($form instanceof HTMLFormElement)) return;
+  if (!($form instanceof HTMLFormElement)) {
+    return;
+  }
 
   const $input = $form.querySelector('[data-module="sirius-search-preview"]');
 
-  if (!($input instanceof HTMLInputElement)) return;
+  if (!($input instanceof HTMLInputElement)) {
+    return;
+  }
 
   new SearchResults($input, $form);
 
