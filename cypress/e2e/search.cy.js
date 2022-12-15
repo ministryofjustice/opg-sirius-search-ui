@@ -60,6 +60,12 @@ describe('Search component', () => {
             cy.contains('.sirius-search__item', 'No cases were found.');
         });
 
+        it('Links to search results page', () => {
+            search('Giusto', 'none.json');
+
+            cy.contains('.sirius-search__item--summary', 'View all').should("have.attr", "href").should("contain", "/lpa/frontend/search?term=Giusto");
+        });
+
         it('Searches for deleted cases if UID searched for', () => {
             cy.intercept(
                 '/lpa-api/v1/deleted-cases?uid=700000021994',
