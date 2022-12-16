@@ -108,7 +108,7 @@ SearchResults.prototype.search = async function search() {
                   </p>
                   <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                       <div class="govuk-summary-list__row">
-                          <dt class="govuk-summary-list__key govuk-!-padding-1">Status:</dt>
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
                           <strong class="govuk-tag govuk-tag--red">
                             Deleted
                           </strong>
@@ -174,14 +174,14 @@ SearchResults.prototype.search = async function search() {
                     </p>
                     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                         <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-1"><abbr title="Date of birth">DOB:</abbr></dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-1">${
+                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1"><abbr title="Date of birth">DOB:</abbr></dt>
+                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
                               result.dob
                             }</dd>
                         </div>
                         <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-1">Address:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-1">${
+                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
+                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
                               result.addresses
                                 ? formatAddress(result.addresses[0])
                                 : ""
@@ -191,8 +191,8 @@ SearchResults.prototype.search = async function search() {
                           result.case.status
                             ? `
                         <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-1">Status:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-1">
+                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
+                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
                               <strong class="govuk-tag govuk-tag--${statusColour(
                                 result.case.status
                               )}">
