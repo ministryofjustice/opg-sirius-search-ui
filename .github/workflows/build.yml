@@ -56,6 +56,9 @@ jobs:
     needs: [cypress, codeql]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Extract branch name
         run: |
           if [ "${{ github.head_ref }}" == "" ]; then
@@ -64,6 +67,7 @@ jobs:
             echo BRANCH_NAME=$(echo ${{ github.head_ref }} | sed 's/\//-/g') >> $GITHUB_ENV
           fi
         id: extract_branch
+
       - name: Bump version
         id: bump_version
         uses: anothrNick/github-tag-action@1.53.0
