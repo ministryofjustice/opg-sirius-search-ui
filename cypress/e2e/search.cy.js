@@ -92,6 +92,12 @@ describe('Search component', () => {
 
             cy.contains('.sirius-search__item--summary', 'Showing 3 of 4 results');
         });
+
+        it('Links to search results page', () => {
+            search('Giusto', 'single.json');
+
+            cy.contains('a', 'View all').should('have.attr', 'href', '/lpa/frontend/search?term=Giusto');
+        });
     });
 
     describe('Attachment', () => {
