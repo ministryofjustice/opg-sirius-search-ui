@@ -125,7 +125,7 @@ SearchResults.prototype.search = async function search() {
       this.render(`
                 <div class="${CLASSES.item}">
                     <p><strong>No donors or clients were found.</strong></p>
-                    <p><a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}">View all results</a></p>
+                    <p><a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all results</a></p>
                 </div>
             `);
     } else {
@@ -213,7 +213,7 @@ SearchResults.prototype.search = async function search() {
             Showing <strong data-id="sirius-search-summary-count">${
               results.length
             }</strong> of <strong>${total}</strong> results
-            <a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" style="float:right">View all</a>
+            <a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self" style="float:right">View all</a>
         </div>
     `);
 
