@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "cypress": "^12.1.0",
-    "esbuild": "^0.16.6"
+    "esbuild": "^0.17.0"
   },
   "peerDependencies": {
     "govuk-frontend": "^4.4.0"
