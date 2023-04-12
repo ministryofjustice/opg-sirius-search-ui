@@ -4,9 +4,6 @@
   "branchPrefix": "renovate-",
   "commitMessageAction": "Renovate Update",
   "labels": ["Dependencies", "Renovate"],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "packageRules": [
     {
       "automerge": true,
