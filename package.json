@@ -12,7 +12,7 @@
     "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "cypress": "^12.1.0",
+    "cypress": "^13.0.0",
     "esbuild": "^0.18.0"
   },
   "peerDependencies": {
