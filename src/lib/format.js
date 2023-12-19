@@ -38,3 +38,25 @@ const statusColourMap = {
 export function statusColour(status) {
   return statusColourMap[status] || "grey";
 }
+
+export function translateSubtype(subtype) {
+  let t
+  switch(subtype.toUpperCase()) {
+    case "HW":
+      t = "Health and welfare"
+      break;
+    case "PFA":
+      t = "Property and finance"
+      break;
+    case "PA":
+      t = "Property affairs"
+      break;
+    case "PW":
+      t = "Personal welfare"
+      break;
+    default:
+      t = subtype
+  }
+
+  return t
+}

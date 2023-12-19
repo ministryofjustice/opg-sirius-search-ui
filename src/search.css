@@ -31,3 +31,7 @@
 .sirius-seach .govuk-link {
   font-size: 1rem;
 }
+
+.sirius-search--colour-text-blue {
+  color: #1d70b8
+}
