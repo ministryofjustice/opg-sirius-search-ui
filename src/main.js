@@ -202,8 +202,9 @@ SearchResults.prototype.search = async function search() {
                         }
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
-                            ${result.case.caseType} - ${ translateSubtype(result.case.caseSubtype.toUpperCase()) }
+                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
+                                result.case.caseType.toUpperCase() === "DIGITAL_LPA" ? "Digital LPA" : result.case.caseType
+                                } - ${ translateSubtype(result.case.caseSubtype.toUpperCase()) }
                             </dd>
                         </div>
                     </dl>
@@ -216,7 +217,7 @@ SearchResults.prototype.search = async function search() {
             Showing <strong data-id="sirius-search-summary-count">${
               results.length
             }</strong> of <strong>${total}</strong> results
-            <a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self" style="float:right">View all</a>
+            <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
         </div>
     `);
 

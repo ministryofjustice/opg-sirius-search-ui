@@ -35,3 +35,7 @@
 .sirius-search--colour-text-blue {
   color: #1d70b8
 }
+
+.sirius-search__link--view-all {
+  float: right;
+}
