@@ -1,5 +1,5 @@
 import { query, queryDeletedCases } from "./lib/api";
-import { escapeHTML, formatAddress, statusColour } from "./lib/format";
+import {escapeHTML, formatAddress, statusColour, translateSubtype} from "./lib/format";
 
 const CLASSES = {
   container: "sirius-search",
@@ -157,19 +157,16 @@ SearchResults.prototype.search = async function search() {
           .map(
             (result) => `
                 <li class="${CLASSES.item}">
-                    <strong>
+                    <strong class="sirius-search--colour-text-blue">
                       ${escapeHTML(result.firstname)} ${escapeHTML(
               result.surname
-            )} [${result.personType}]
+            )}, ${result.personType}
                     </strong>
                     <p class="${CLASSES.link}">
                         <a class="govuk-link" href="/lpa/person/${result.id}/${
               result.case.id
             }">
                             ${result.case.uId}
-                            ${
-                              result.case.caseType
-                            }/${result.case.caseSubtype.toUpperCase()}
                         </a>
                     </p>
                     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
@@ -203,6 +200,13 @@ SearchResults.prototype.search = async function search() {
                         `
                             : ""
                         }
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
+                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
+                                result.case.caseType.toUpperCase() === "DIGITAL_LPA" ? "Digital LPA" : result.case.caseType
+                                } - ${ translateSubtype(result.case.caseSubtype.toUpperCase()) }
+                            </dd>
+                        </div>
                     </dl>
                 </li>
             `
@@ -213,7 +217,7 @@ SearchResults.prototype.search = async function search() {
             Showing <strong data-id="sirius-search-summary-count">${
               results.length
             }</strong> of <strong>${total}</strong> results
-            <a class="govuk-link" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self" style="float:right">View all</a>
+            <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
         </div>
     `);
 

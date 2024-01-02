@@ -12,37 +12,40 @@ describe('Search component', () => {
         it('Displays basic case information', () => {
             search('Giusto', 'single.json');
 
-            cy.contains('.sirius-search__item', 'Giusto Rita [Donor]').within(() => {
-                cy.contains('a', '7000-2910-9383 LPA/HW').should('have.attr', 'href', '/lpa/person/75/14');
+            cy.contains('.sirius-search__item', 'Giusto Rita, Donor').within(() => {
+                cy.contains('a', '7000-2910-9383').should('have.attr', 'href', '/lpa/person/75/14');
 
                 cy.contains('dt', 'DOB').next().contains('19/01/1934');
                 cy.contains('dt', 'Address').next().contains('9046 Harvey Track, Suite 540, Violaport, Lothian, EQ4 1PR, United Kingdom');
                 cy.contains('dt', 'Status').next().contains('Pending');
+                cy.contains('dt', 'Type').next().contains('LPA - Health and welfare');
             });
         });
 
         it('Expands cases', () => {
             search('Lloyd', 'multiple.json');
 
-            cy.get('.sirius-search__item:contains(Lloyd Poullard [Donor])')
+            cy.get('.sirius-search__item:contains(Lloyd Poullard, Donor)')
                 .eq(0)
                 .within(() => {
-                    cy.contains('a', '7000-2910-2948 LPA/HW').should('have.attr', 'href', '/lpa/person/94/315');
+                    cy.contains('a', '7000-2910-2948').should('have.attr', 'href', '/lpa/person/94/315');
                     cy.contains('dt', 'Status').next().contains('Registered');
+                    cy.contains('dt', 'Type').next().contains('LPA - Health and welfare');
                 });
 
-            cy.get('.sirius-search__item:contains(Lloyd Poullard [Donor])')
+            cy.get('.sirius-search__item:contains(Lloyd Poullard, Donor)')
                 .eq(1)
                 .within(() => {
-                    cy.contains('a', '7000-2910-1244 LPA/PFA').should('have.attr', 'href', '/lpa/person/94/219');
+                    cy.contains('a', '7000-2910-1244').should('have.attr', 'href', '/lpa/person/94/219');
                     cy.contains('dt', 'Status').next().contains('Pending');
+                    cy.contains('dt', 'Type').next().contains('LPA - Property and finance');
                 });
         });
 
         it('Hides cases if they overflow', () => {
             search('Test', 'overflow.json');
 
-            cy.get('.sirius-search__item:contains([Donor])').should('have.length', 3);
+            cy.get('.sirius-search__item:contains(Donor)').should('have.length', 3);
         });
 
         it('Formats status correctly', () => {
