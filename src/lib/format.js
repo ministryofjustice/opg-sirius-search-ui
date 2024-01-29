@@ -24,15 +24,17 @@ export function formatAddress(address) {
 
 const statusColourMap = {
   Registered: "green",
+  Draft: "purple",
   Perfect: "turquoise",
-  Pending: "blue",
-  "Payment Pending": "purple",
-  "Reduced Fees Pending": "purple",
+  Pending: "yellow",
+  "Payment Pending": "blue",
+  "Reduced Fees Pending": "blue",
   Cancelled: "red",
   Rejected: "red",
   "Return - unpaid": "red",
   Revoked: "red",
   Withdrawn: "red",
+  Deleted: "red"
 };
 
 export function statusColour(status) {
