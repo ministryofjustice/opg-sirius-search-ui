@@ -1,0 +1,21 @@
+{
+    "total": { "count": 1 },
+    "results": [
+        {
+            "id": 94,
+            "firstname": "Abelard",
+            "surname": "Brroo",
+            "dob": "01/07/1990",
+            "personType": "Donor",
+            "addresses": [
+                {
+                    "addressLines": ["83111 Nowhere Lane"]
+                }
+            ],
+            "cases": [
+                { "id": 90, "uId": "M-QQQQ-EEEE-WWWW", "caseType": "DIGITAL_LPA", "caseSubtype": "personal-welfare", "status": "Registered" },
+                { "id": 78, "uId": "M-1111-2222-3333", "caseType": "DIGITAL_LPA", "caseSubtype": "property-and-affairs", "status": "Pending" }
+            ]
+        }
+    ]
+}
