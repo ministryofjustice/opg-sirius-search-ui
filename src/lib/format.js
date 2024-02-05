@@ -50,10 +50,10 @@ export function translateSubtype(subtype) {
     case "PFA":
       t = "Property and finance"
       break;
-    case "PA":
-      t = "Property affairs"
+    case "PROPERTY-AND-AFFAIRS":
+      t = "Property and affairs"
       break;
-    case "PW":
+    case "PERSONAL-WELFARE":
       t = "Personal welfare"
       break;
     default:
