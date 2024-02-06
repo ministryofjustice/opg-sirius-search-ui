@@ -42,6 +42,26 @@ describe('Search component', () => {
                 });
         });
 
+        it('Formats digital LPA subtypes correctly', () => {
+            search('Brroo', 'multiple-digital-lpas.json');
+
+            cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
+                .eq(0)
+                .within(() => {
+                    cy.contains('a', 'M-QQQQ-EEEE-WWWW').should('have.attr', 'href', '/lpa/person/94/90');
+                    cy.contains('dt', 'Status').next().contains('Registered');
+                    cy.contains('dt', 'Type').next().contains('Digital LPA - Personal welfare');
+                });
+
+            cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
+                .eq(1)
+                .within(() => {
+                    cy.contains('a', 'M-1111-2222-3333').should('have.attr', 'href', '/lpa/person/94/78');
+                    cy.contains('dt', 'Status').next().contains('Pending');
+                    cy.contains('dt', 'Type').next().contains('Digital LPA - Property and affairs');
+                });
+        });
+
         it('Hides cases if they overflow', () => {
             search('Test', 'overflow.json');
 
