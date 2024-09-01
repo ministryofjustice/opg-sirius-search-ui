@@ -23,7 +23,7 @@ jobs:
         run: yarn && yarn build
 
       - name: Cypress Tests
-        uses: cypress-io/github-action@v6.7.0
+        uses: cypress-io/github-action@v6.7.4
         with:
           browser: chrome
 
@@ -70,7 +70,7 @@ jobs:
 
       - name: Bump version
         id: bump_version
-        uses: anothrNick/github-tag-action@1.69.0
+        uses: anothrNick/github-tag-action@1.70.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: minor
