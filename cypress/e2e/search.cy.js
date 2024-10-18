@@ -72,7 +72,7 @@ describe('Search component', () => {
             search('Lloyd', 'multiple.json');
 
             cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
-            cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--yellow');
+            cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
         });
     });
 
