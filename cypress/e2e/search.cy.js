@@ -48,7 +48,7 @@ describe('Search component', () => {
             cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
                 .eq(0)
                 .within(() => {
-                    cy.contains('a', 'M-QQQQ-EEEE-WWWW').should('have.attr', 'href', '/lpa/person/94/90');
+                    cy.contains('a', 'M-QQQQ-EEEE-WWWW').should('have.attr', 'href', '/lpa/frontend/lpa/M-QQQQ-EEEE-WWWW');
                     cy.contains('dt', 'Status').next().contains('Registered');
                     cy.contains('dt', 'Type').next().contains('Digital LPA - Personal welfare');
                 });
@@ -56,7 +56,7 @@ describe('Search component', () => {
             cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
                 .eq(1)
                 .within(() => {
-                    cy.contains('a', 'M-1111-2222-3333').should('have.attr', 'href', '/lpa/person/94/78');
+                    cy.contains('a', 'M-1111-2222-3333').should('have.attr', 'href', '/lpa/frontend/lpa/M-1111-2222-3333');
                     cy.contains('dt', 'Status').next().contains('Pending');
                     cy.contains('dt', 'Type').next().contains('Digital LPA - Property and affairs');
                 });

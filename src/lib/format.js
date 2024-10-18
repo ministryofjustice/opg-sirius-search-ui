@@ -23,18 +23,24 @@ export function formatAddress(address) {
 }
 
 const statusColourMap = {
-  Registered: "green",
+  Cancelled: "red",
+  "Cannot register": "red",
   Draft: "purple",
+  "De-registered": "red",
+  Deleted: "red",
+  "Do not register": "red",
+  Expired: "red",
+  "In progress": "light-blue",
   Perfect: "turquoise",
-  Pending: "yellow",
+  Pending: "blue",
   "Payment Pending": "blue",
   "Reduced Fees Pending": "blue",
-  Cancelled: "red",
+  Registered: "green",
   Rejected: "red",
   "Return - unpaid": "red",
   Revoked: "red",
+  "Statutory waiting period": "yellow",
   Withdrawn: "red",
-  Deleted: "red"
 };
 
 export function statusColour(status) {
