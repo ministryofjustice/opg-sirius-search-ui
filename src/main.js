@@ -163,11 +163,17 @@ SearchResults.prototype.search = async function search() {
             )}, ${result.personType}
                     </strong>
                     <p class="${CLASSES.link}">
-                        <a class="govuk-link" href="/lpa/person/${result.id}/${
-              result.case.id
-            }">
+                        ${
+                          result.case.caseType === "DIGITAL_LPA"
+                            ? `
+                        <a class="govuk-link" href="/lpa/frontend/lpa/${result.case.uId}">
                             ${result.case.uId}
-                        </a>
+                        </a>`
+                            : `
+                        <a class="govuk-link" href="/lpa/person/${result.id}/${result.case.id}">
+                            ${result.case.uId}
+                        </a>`
+                        }
                     </p>
                     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                         <div class="govuk-summary-list__row">
