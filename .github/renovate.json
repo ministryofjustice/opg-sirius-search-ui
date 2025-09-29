@@ -14,20 +14,24 @@
   ],
   "packageRules": [
       {
-          "automerge": true,
-          "groupName": "Patch & Minor Updates",
-          "groupSlug": "all-minor-patch-updates",
-          "matchUpdateTypes": [
-              "minor",
-              "patch"
-          ],
-          "prPriority": 1,
-          "schedule": "* 0-6 1 * *",
-          "minimumReleaseAge": "3 days",
-          "matchPackageNames": [
-              "*"
-          ]
-      }
+            "automerge": true,
+            "groupName": "Patch & Minor Updates",
+            "groupSlug": "all-minor-patch-updates",
+            "matchUpdateTypes": ["minor", "patch"],
+            "prPriority": 1,
+            "minimumReleaseAge": "3 days",
+            "matchPackageNames": ["*"]
+        },
+        {
+            "automerge": true,
+            "groupName": "Github Patch & Minor Updates",
+            "groupSlug": "github-minor-patch-updates",
+            "matchUpdateTypes": ["minor", "patch"],
+            "prPriority": 2,
+            "minimumReleaseAge": "3 days",
+            "matchPackageNames": ["*"],
+            "matchFileNames": [".github/**"]
+        }
   ],
   "major": {
       "labels": [
