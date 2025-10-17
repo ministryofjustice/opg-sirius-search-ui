@@ -155,7 +155,8 @@ SearchResults.prototype.search = async function search() {
         <ul class="${CLASSES.list}">
         ${results
           .map(
-            (result) => `
+            (result) =>
+              `
                 <li class="${CLASSES.item}">
                     <strong class="sirius-search--colour-text-blue">
                       ${escapeHTML(result.firstname)} ${escapeHTML(
@@ -163,17 +164,22 @@ SearchResults.prototype.search = async function search() {
             )}, ${result.personType}
                     </strong>
                     <p class="${CLASSES.link}">
-                        ${
-                          result.case.caseType === "DIGITAL_LPA"
-                            ? `
+                      ${
+                        result.case.caseType === "DIGITAL_LPA"
+                          ? `
                         <a class="govuk-link" href="/lpa/frontend/lpa/${result.case.uId}">
-                            ${result.case.uId}
+                          ${result.case.uId}
                         </a>`
-                            : `
+                        : result.case.caseType === "order"
+                          ? `
+                        <a class="govuk-link" href="/supervision#/clients/${result.id}/${result.case.id}">
+                          ${result.case.uId}
+                        </a>`
+                          : `
                         <a class="govuk-link" href="/lpa/person/${result.id}/${result.case.id}">
-                            ${result.case.uId}
+                          ${result.case.uId}
                         </a>`
-                        }
+                      }
                     </p>
                     <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                         <div class="govuk-summary-list__row">
