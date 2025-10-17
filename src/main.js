@@ -170,7 +170,7 @@ SearchResults.prototype.search = async function search() {
                             ${result.case.uId}
                         </a>`
                             : `
-                        <a class="govuk-link" href="/lpa/person/${result.id}/${result.case.id}">
+                        <a class="govuk-link" href="/#/person/${result.id}/${result.case.id}">
                             ${result.case.uId}
                         </a>`
                         }
