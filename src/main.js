@@ -215,7 +215,11 @@ SearchResults.prototype.search = async function search() {
                         <div class="govuk-summary-list__row">
                             <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
                             <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                                result.case.caseType.toUpperCase() === "DIGITAL_LPA" ? "Digital LPA" : result.case.caseType
+                                result.case.caseType.toUpperCase() === "DIGITAL_LPA" 
+                                  ? "Digital LPA" 
+                                  : result.case.caseType.toLowerCase() === "order"
+                                  ? "Order"
+                                  : result.case.caseType
                                 } - ${ translateSubtype(result.case.caseSubtype.toUpperCase()) }
                             </dd>
                         </div>
