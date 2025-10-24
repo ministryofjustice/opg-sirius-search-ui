@@ -1,0 +1,89 @@
+{
+  "results": [
+    {
+      "workPhoneNumber": {
+        "id": 83,
+        "phoneNumber": "",
+        "type": "Work",
+        "default": false
+      },
+      "id": 72,
+      "uId": "7000-0000-2563",
+      "normalizedUid": 700000002563,
+      "dob": "01\/01\/1980",
+      "salutation": "Maquis",
+      "firstname": "Antoine",
+      "surname": "Burgundy",
+      "addressLine1": "100  Davids Lane",
+      "addressLine2": "",
+      "addressLine3": "",
+      "town": "Struy",
+      "county": "Dorset",
+      "postcode": "IV48RG",
+      "country": "",
+      "isAirmailRequired": true,
+      "addresses": [
+        {
+          "id": 72,
+          "addressLines": [
+            "100  Davids Lane",
+            "",
+            ""
+          ],
+          "town": "Struy",
+          "county": "Dorset",
+          "postcode": "IV48RG",
+          "country": "",
+          "isAirmailRequired": true,
+          "type": "Primary",
+          "addressLine1": "100  Davids Lane",
+          "addressLine2": "",
+          "addressLine3": ""
+        }
+      ],
+      "phoneNumber": "",
+      "phoneNumbers": [
+        {
+          "id": 83,
+          "phoneNumber": "",
+          "type": "Work",
+          "default": false
+        }
+      ],
+      "personType": "Client",
+      "cases": [
+        {
+          "id": 104,
+          "uId": "7000-0000-2597",
+          "normalizedUid": 700000002597,
+          "caseSubtype": "hw",
+          "createdDate": "17\/10\/2025",
+          "receiptDate": "10\/01\/2018",
+          "statusDate": "01\/01\/2018",
+          "ragRating": 3,
+          "caseRecNumber": "55891477",
+          "caseType": "ORDER",
+          "fileLocationDescription": "",
+          "orderDate": "01\/01\/2018",
+          "orderIssueDate": "05\/01\/2018",
+          "orderStatus": {
+            "handle": "OPEN",
+            "label": "Open"
+          },
+          "orderExpiryDate": "01\/01\/2021",
+          "title": "Active order New Deputy"
+        }
+      ],
+      "errorMessages": []
+    }
+  ],
+  "aggregations": {
+    "personType": {
+      "Client": 1
+    }
+  },
+  "total": {
+    "count": 1,
+    "exact": true
+  }
+}
