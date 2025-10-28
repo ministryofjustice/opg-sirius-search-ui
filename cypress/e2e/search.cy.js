@@ -42,6 +42,18 @@ describe('Search component', () => {
                 });
         });
 
+        it('Displays basic case information', () => {
+          search('Antoine Burgundy', 'supervision-case.json');
+
+          cy.contains('.sirius-search__item', 'Antoine Burgundy, Client').within(() => {
+            cy.contains('a', '7000-0000-2597').should('have.attr', 'href', '/supervision/#/clients/72?order=104');
+
+            cy.contains('dt', 'DOB').next().contains('01/01/1980');
+            cy.contains('dt', 'Address').next().contains('100 Davids Lane, Struy, Dorset, IV48RG');
+            cy.contains('dt', 'Type').next().contains('Order - Health and welfare');
+          });
+        });
+
         it('Formats digital LPA subtypes correctly', () => {
             search('Brroo', 'multiple-digital-lpas.json');
 
