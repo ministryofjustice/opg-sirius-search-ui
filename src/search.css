@@ -1,8 +1,6 @@
 .sirius-search {
-  position: relative;
-  top: 100%;
-  left: 0;
-  right: 0;
+  top: auto;
+  left: auto;
   background-color: #f3f2f1;
   box-shadow: 0 5px 5px #b1b4b6;
   z-index: 100;
