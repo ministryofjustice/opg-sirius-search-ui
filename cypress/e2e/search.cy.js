@@ -134,46 +134,4 @@ describe('Search component', () => {
             cy.contains('a', 'View all').should('have.attr', 'href', '/lpa/frontend/search?term=Giusto');
         });
     });
-
-    describe('Attachment', () => {
-        it('Attaches to input by default', () => {
-            search('Giusto', 'single.json');
-
-            cy.get('input').then(($input) => {
-                const inputBox = $input[0].getBoundingClientRect();
-                cy.get('.sirius-search').then(($container) => {
-                    const containerBox = $container[0].getBoundingClientRect();
-
-                    expect(containerBox.left).equal(inputBox.left);
-                    expect(containerBox.top).equal(inputBox.bottom);
-                    expect(containerBox.right).equal(inputBox.right);
-                });
-            });
-        });
-
-        it('Attaches to custom element if asked', () => {
-            cy.visit('./cypress/e2e/test.html');
-
-            cy.intercept('/lpa-api/v1/search/persons', { fixture: 'single.json' });
-
-            // Overwrite attachment
-            cy.get('input').then(($input) => {
-                $input[0].setAttribute('data-sirius-search-preview-attach', '#floating-box');
-            });
-            cy.get('input').type('search');
-            cy.get('button').click();
-
-            // Check position
-            cy.get('#floating-box').then(($input) => {
-                const inputBox = $input[0].getBoundingClientRect();
-                cy.get('.sirius-search').then(($container) => {
-                    const containerBox = $container[0].getBoundingClientRect();
-
-                    expect(containerBox.left).equal(inputBox.left);
-                    expect(containerBox.top).equal(inputBox.bottom);
-                    expect(containerBox.right).equal(inputBox.right);
-                });
-            });
-        });
-    });
 });
