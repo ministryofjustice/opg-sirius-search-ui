@@ -131,7 +131,7 @@ SearchResults.prototype.search = async function search() {
     } else {
       this.render(`
                 <div class="${CLASSES.item}">
-                    <p><strong>No cases were found. Allan</strong></p>
+                    <p><strong>No cases were found.</strong></p>
                     <p>This could be because:</p>
                     <ul class="govuk-list govuk-list--bullet">
                         <li>the paper LPA hasn’t been scanned yet</li>
@@ -158,11 +158,9 @@ SearchResults.prototype.search = async function search() {
             (result) =>
               `
                 <li class="${CLASSES.item}">
-                    <strong class="sirius-search--colour-text-blue">
-                      ${escapeHTML(result.firstname)} ${escapeHTML(
-              result.surname
-            )}, ${result.personType}
-                    </strong>
+                 <a class="govuk-link" href="/lpa/frontend/lpa/${result.case.uId}">
+                    ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
+                  </a>
                     <p class="${CLASSES.link}">
                       ${               
                         result.case.caseType === "DIGITAL_LPA"
