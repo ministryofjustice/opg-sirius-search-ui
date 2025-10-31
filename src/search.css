@@ -5,7 +5,7 @@
 .govuk-phase-banner .app-search-inline-phase-banner {
   position: sticky;
   top: 100%;
-  z-index: 100;
+  z-index: 1;
 }
 
 .sirius-search {
