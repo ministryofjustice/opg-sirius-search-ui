@@ -11,7 +11,7 @@
 .sirius-search {
   top: 0;
   left: 0;
-  position: relative;
+  position: static;
   background-color: #f3f2f1;
   box-shadow: 0 5px 5px #b1b4b6;
 }
