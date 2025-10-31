@@ -131,7 +131,7 @@ SearchResults.prototype.search = async function search() {
     } else {
       this.render(`
                 <div class="${CLASSES.item}">
-                    <p><strong>No cases were found.</strong></p>
+                    <p><strong>No cases were found. Allan</strong></p>
                     <p>This could be because:</p>
                     <ul class="govuk-list govuk-list--bullet">
                         <li>the paper LPA hasn’t been scanned yet</li>
