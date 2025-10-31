@@ -5,15 +5,15 @@
 .govuk-phase-banner .app-search-inline-phase-banner {
   position: sticky;
   top: 100%;
+  z-index: 100;
 }
 
 .sirius-search {
-  top: auto;
-  left: auto;
+  top: 0;
+  left: 0;
   position: relative;
   background-color: #f3f2f1;
   box-shadow: 0 5px 5px #b1b4b6;
-  z-index: 100;
 }
 
 .sirius-search__list {
