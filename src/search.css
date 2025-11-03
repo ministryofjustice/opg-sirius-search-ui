@@ -1,17 +1,14 @@
-.govuk-phase-banner .app-align-items-center {
-  height: 40px;
-}
-
-.govuk-phase-banner .app-search-inline-phase-banner {
-  position: sticky;
-  top: 100%;
-  z-index: 1;
+.govuk-phase-banner .app-search-inline-phase-banner form {
+  position: relative;
+  z-index: 10;
 }
 
 .sirius-search {
-  top: 0;
-  left: 0;
-  position: static;
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  right: 0%;
+  z-index: 100;
   background-color: #f3f2f1;
   box-shadow: 0 5px 5px #b1b4b6;
 }
