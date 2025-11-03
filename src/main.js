@@ -36,6 +36,7 @@ function SearchResults($input, $form) {
     this.$container.style.position = "fixed";
   }
 
+  this.$form.style.position = "relative";
   this.$form.appendChild(this.$container);
 
   this.$input.addEventListener("focus", () => {

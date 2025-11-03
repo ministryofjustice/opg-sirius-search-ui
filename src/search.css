@@ -1,12 +1,7 @@
-.govuk-phase-banner .app-search-inline-phase-banner form {
-  position: relative;
-  z-index: 10;
-}
-
 .sirius-search {
   position: absolute;
-  left: 0%;
-  right: 0%;
+  left: 0;
+  right: 0;
   z-index: 100;
   background-color: #f3f2f1;
   box-shadow: 0 5px 5px #b1b4b6;
