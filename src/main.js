@@ -164,7 +164,7 @@ SearchResults.prototype.search = async function search() {
   
           return `
                   <li class="${CLASSES.item}">
-                   <a class="govuk-link" href="${caseUrl}">
+                   <a class="govuk-!-font-weight-bold govuk-link" href="${caseUrl}">
                       ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
                     </a>
                       <p class="${CLASSES.link}">
