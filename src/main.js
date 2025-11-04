@@ -158,55 +158,54 @@ SearchResults.prototype.search = async function search() {
         (result) => {
           const caseUrl = result.case.caseType === "DIGITAL_LPA"
             ? `/lpa/frontend/lpa/${result.case.uId}`
-            : result.case.caseType.toLowerCase() === "order" 
+            : result.case.caseType.toLowerCase() === "order"
             ? `/supervision/#/clients/${result.id}?order=${result.case.id}`
             : `/lpa/person/${result.id}/${result.case.id}`;
-  
+
+          const caseTypeDisplay = result.case.caseType.toUpperCase() === "DIGITAL_LPA"
+            ? "Digital LPA"
+            : result.case.caseType.toLowerCase() === "order"
+            ? "Order"
+            : result.case.caseType;
+
           return `
-                  <li class="${CLASSES.item}">
-                   <a class="govuk-!-font-weight-bold govuk-link" href="${caseUrl}">
-                      ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
-                    </a>
-                      <p class="${CLASSES.link}">
-                          <a class="govuk-link" href="${caseUrl}">
-                            ${result.case.uId}
-                          </a>
-                      </p>
-                      <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
-                          <div class="govuk-summary-list__row">
-                              <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1"><abbr title="Date of birth">DOB:</abbr></dt>
-                              <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${result.dob}</dd>
-                          </div>
-                          <div class="govuk-summary-list__row">
-                              <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
-                              <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                              result.addresses ? formatAddress(result.addresses[0]) : ""
-                              }</dd>
-                          </div>
-                          ${result.case.status ? `
-                          <div class="govuk-summary-list__row">
-                              <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
-                              <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
-                                <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)}">
-                                  ${result.case.status}
-                                </strong>
-                              </dd>
-                          </div>
-                          ` : ""}
-                          <div class="govuk-summary-list__row">
-                              <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
-                              <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                                  result.case.caseType.toUpperCase() === "DIGITAL_LPA"
-                                    ? "Digital LPA"
-                                    : result.case.caseType.toLowerCase() === "order"
-                                      ? "Order"
-                                      : result.case.caseType
-                                } - ${translateSubtype(result.case.caseSubtype.toUpperCase())}
-                              </dd>
-                          </div>
-                      </dl>
-                  </li>
-              `;
+              <li class="${CLASSES.item}">
+               <a class="govuk-link" href="${caseUrl}">
+                  ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
+                </a>
+                  <p class="${CLASSES.link}">
+                      <a class="govuk-link" href="${caseUrl}">
+                        ${result.case.uId}
+                      </a>
+                  </p>
+                  <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1"><abbr title="Date of birth">DOB:</abbr></dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${result.dob}</dd>
+                      </div>
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
+                        result.addresses ? formatAddress(result.addresses[0]) : ""
+                      }</dd>
+                      </div>
+                      ${result.case.status ? `
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
+                            <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)}">
+                              ${result.case.status}
+                            </strong>
+                          </dd>
+                      </div>
+                      ` : ""}
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${caseTypeDisplay} - ${translateSubtype(result.case.caseSubtype.toUpperCase())}</dd>
+                      </div>
+                  </dl>
+              </li>
+            `;
         }
       )
     .join("")}
