@@ -153,85 +153,64 @@ SearchResults.prototype.search = async function search() {
   this.render(`
         <ul class="${CLASSES.list}">
         ${results
-          .map(
-            (result) =>
-              `
-                <li class="${CLASSES.item}">
-                    <strong class="sirius-search--colour-text-blue">
-                      ${escapeHTML(result.firstname)} ${escapeHTML(
-              result.surname
-            )}, ${result.personType}
-                    </strong>
-                    <p class="${CLASSES.link}">
-                      ${               
-                        result.case.caseType === "DIGITAL_LPA"
-                          ? `
-                        <a class="govuk-link" href="/lpa/frontend/lpa/${result.case.uId}">
-                          ${result.case.uId}
-                        </a>`
-                        : result.case.caseType.toLowerCase() === "order"
-                          ? `
-                        <a class="govuk-link" href="/supervision/#/clients/${result.id}?order=${result.case.id}">
-                          ${result.case.uId}
-                        </a>`
-                          : `
-                        <a class="govuk-link" href="/lpa/person/${result.id}/${result.case.id}">
-                          ${result.case.uId}
-                        </a>`
-                      }
-                    </p>
-                    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1"><abbr title="Date of birth">DOB:</abbr></dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                              result.dob
-                            }</dd>
-                        </div>
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                              result.addresses
-                                ? formatAddress(result.addresses[0])
-                                : ""
-                            }</dd>
-                        </div>
-                        ${
-                          result.case.status
-                            ? `
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
-                              <strong class="govuk-tag govuk-tag--${statusColour(
-                                result.case.status
-                              )}">
-                                ${result.case.status}
-                              </strong>
-                            </dd>
-                        </div>
-                        `
-                            : ""
-                        }
-                        <div class="govuk-summary-list__row">
-                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
-                            <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                                result.case.caseType.toUpperCase() === "DIGITAL_LPA" 
-                                  ? "Digital LPA" 
-                                  : result.case.caseType.toLowerCase() === "order"
-                                  ? "Order"
-                                  : result.case.caseType
-                                } - ${ translateSubtype(result.case.caseSubtype.toUpperCase()) }
-                            </dd>
-                        </div>
-                    </dl>
-                </li>
-            `
-          )
-          .join("")}
+      .map(
+        (result) => {
+          const caseUrl = result.case.caseType === "DIGITAL_LPA"
+            ? `/lpa/frontend/lpa/${result.case.uId}`
+            : result.case.caseType.toLowerCase() === "order"
+            ? `/supervision/#/clients/${result.id}?order=${result.case.id}`
+            : `/lpa/person/${result.id}/${result.case.id}`;
+
+          const caseTypeDisplay = result.case.caseType.toUpperCase() === "DIGITAL_LPA"
+            ? "Digital LPA"
+            : result.case.caseType.toLowerCase() === "order"
+            ? "Order"
+            : result.case.caseType;
+
+          return `
+              <li class="${CLASSES.item}">
+               <a class="govuk-link" href="${caseUrl}">
+                  ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
+                </a>
+                  <p class="${CLASSES.link}">
+                      <a class="govuk-link" href="${caseUrl}">
+                        ${result.case.uId}
+                      </a>
+                  </p>
+                  <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1"><abbr title="Date of birth">DOB:</abbr></dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${result.dob}</dd>
+                      </div>
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
+                        result.addresses ? formatAddress(result.addresses[0]) : ""
+                      }</dd>
+                      </div>
+                      ${result.case.status ? `
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
+                            <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)}">
+                              ${result.case.status}
+                            </strong>
+                          </dd>
+                      </div>
+                      ` : ""}
+                      <div class="govuk-summary-list__row">
+                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
+                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${caseTypeDisplay} - ${translateSubtype(result.case.caseSubtype.toUpperCase())}</dd>
+                      </div>
+                  </dl>
+              </li>
+            `;
+        }
+      )
+    .join("")}
         </ul>
         <div class="${CLASSES.item} ${CLASSES.itemSummary}">
-            Showing <strong data-id="sirius-search-summary-count">${
-              results.length
-            }</strong> of <strong>${total}</strong> results
+            Showing <strong data-id="sirius-search-summary-count">${results.length}</strong> of <strong>${total}</strong> results
             <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
         </div>
     `);
