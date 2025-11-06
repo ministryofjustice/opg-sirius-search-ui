@@ -30,14 +30,13 @@ function SearchResults($input, $form) {
       .getBoundingClientRect();
   }
 
-  this.$container.style.top = `${inputBoundingBox.bottom}px`;
-  this.$container.style.left = `${inputBoundingBox.left}px`;
   this.$container.style.width = `${inputBoundingBox.width}px`;
 
   if (this.config.position === "fixed") {
     this.$container.style.position = "fixed";
   }
 
+  this.$form.style.position = "relative";
   this.$form.appendChild(this.$container);
 
   this.$input.addEventListener("focus", () => {
