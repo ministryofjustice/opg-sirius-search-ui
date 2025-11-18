@@ -32,8 +32,8 @@ function SearchResults($input, $form) {
 
   this.$container.style.width = `${inputBoundingBox.width}px`;
 
-  if (this.config.position === "fixed") {
-    this.$container.style.position = "fixed";
+  if (this.config.position === "top") {
+    this.$container.style.top = "33px";
   }
 
   this.$form.style.position = "relative";
