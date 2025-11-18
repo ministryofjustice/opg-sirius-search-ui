@@ -33,7 +33,7 @@ function SearchResults($input, $form) {
   this.$container.style.width = `${inputBoundingBox.width}px`;
 
   if (this.config.position === "top") {
-    this.$container.style.top = "33px";
+    this.$container.style.top = "100%";
   }
 
   this.$form.style.position = "relative";
@@ -169,11 +169,11 @@ SearchResults.prototype.search = async function search() {
 
           return `
               <li class="${CLASSES.item}">
-               <a class="govuk-link" href="${caseUrl}">
+               <a target="_self"  class="govuk-link" href="${caseUrl}">
                   ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
                 </a>
                   <p class="${CLASSES.link}">
-                      <a class="govuk-link" href="${caseUrl}">
+                      <a target="_self"  class="govuk-link" href="${caseUrl}">
                         ${result.case.uId}
                       </a>
                   </p>
