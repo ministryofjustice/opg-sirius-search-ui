@@ -1,5 +1,5 @@
 import { query, queryDeletedCases } from "./lib/api";
-import {escapeHTML, formatAddress, statusColour, translateSubtype} from "./lib/format";
+import {escapeHTML, formatAddress, statusColour, formatCaseType} from "./lib/format";
 
 const CLASSES = {
   container: "sirius-search",
@@ -7,6 +7,7 @@ const CLASSES = {
   item: "sirius-search__item",
   itemSummary: "sirius-search__item--summary",
   link: "sirius-search__link",
+  caseTypeTag: "app-govuk-tag",
 };
 
 function SearchResults($input, $form) {
@@ -151,6 +152,11 @@ SearchResults.prototype.search = async function search() {
   }
 
   this.render(`
+        <div class="${CLASSES.item} ${CLASSES.itemSummary}">
+            Showing <strong data-id="sirius-search-summary-count">${results.length}</strong> of <strong>${total}</strong> results
+            <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
+        </div>
+        <hr class="govuk-section-break govuk-section-break--visible" />
         <ul class="${CLASSES.list}">
         ${results
       .map(
@@ -161,21 +167,28 @@ SearchResults.prototype.search = async function search() {
             ? `/supervision/#/clients/${result.id}?order=${result.case.id}`
             : `/lpa/person/${result.id}/${result.case.id}`;
 
-          const caseTypeDisplay = result.case.caseType.toUpperCase() === "DIGITAL_LPA"
-            ? "Digital LPA"
-            : result.case.caseType.toLowerCase() === "order"
-            ? "Order"
-            : result.case.caseType;
+          const caseTypeDisplay = formatCaseType(result.case.caseType, result.case.caseSubtype);
+          const caseTypeTagHTML = caseTypeDisplay.colour
+            ? `<strong class="${CLASSES.caseTypeTag} govuk-tag--${caseTypeDisplay.colour} govuk-!-margin-right-1">
+                ${caseTypeDisplay.type}
+              </strong>`
+            : "";
 
           return `
               <li class="${CLASSES.item}">
-               <a target="_self"  class="govuk-link" href="${caseUrl}">
+                <a target="_self"  class="govuk-link" href="${caseUrl}">
                   ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
                 </a>
                   <p class="${CLASSES.link}">
-                      <a target="_self"  class="govuk-link" href="${caseUrl}">
-                        ${result.case.uId}
-                      </a>
+                    ${caseTypeTagHTML}
+                  <a target="_self"  class="govuk-link" href="${caseUrl}">
+                      ${caseTypeTagHTML ? result.case.uId : `${caseTypeDisplay.type} ${result.case.uId}`}
+                    </a>
+                    ${result.case.status ? `
+                      <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)} govuk-!-margin-left-1">
+                        ${result.case.status}
+                      </strong>
+                    ` : ""}
                   </p>
                   <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                       <div class="govuk-summary-list__row">
@@ -185,22 +198,8 @@ SearchResults.prototype.search = async function search() {
                       <div class="govuk-summary-list__row">
                           <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Address:</dt>
                           <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${
-                        result.addresses ? formatAddress(result.addresses[0]) : ""
-                      }</dd>
-                      </div>
-                      ${result.case.status ? `
-                      <div class="govuk-summary-list__row">
-                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
-                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">
-                            <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)}">
-                              ${result.case.status}
-                            </strong>
-                          </dd>
-                      </div>
-                      ` : ""}
-                      <div class="govuk-summary-list__row">
-                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Type:</dt>
-                          <dd class="govuk-summary-list__value govuk-!-padding-top-1 govuk-!-padding-bottom-1">${caseTypeDisplay} - ${translateSubtype(result.case.caseSubtype.toUpperCase())}</dd>
+                            result.addresses ? formatAddress(result.addresses[0]) : ""
+                          }</dd>
                       </div>
                   </dl>
               </li>
@@ -209,10 +208,6 @@ SearchResults.prototype.search = async function search() {
       )
     .join("")}
         </ul>
-        <div class="${CLASSES.item} ${CLASSES.itemSummary}">
-            Showing <strong data-id="sirius-search-summary-count">${results.length}</strong> of <strong>${total}</strong> results
-            <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
-        </div>
     `);
 
   this.resizeContainer();
