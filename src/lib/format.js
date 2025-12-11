@@ -47,24 +47,27 @@ export function statusColour(status) {
   return statusColourMap[status] || "grey";
 }
 
-export function translateSubtype(subtype) {
-  let t
-  switch(subtype.toUpperCase()) {
-    case "HW":
-      t = "Health and welfare"
-      break;
-    case "PFA":
-      t = "Property and finance"
-      break;
-    case "PROPERTY-AND-AFFAIRS":
-      t = "Property and affairs"
-      break;
-    case "PERSONAL-WELFARE":
-      t = "Personal welfare"
-      break;
-    default:
-      t = subtype
-  }
 
-  return t
+const caseSubtypeFormatMap = {
+  "HW": {type: "HW", colour: "grass-green"},
+  "PFA": {type: "PFA", colour: "turquoise"},
+  "PERSONAL-WELFARE": {type: "PW", colour: "grass-green"},
+  "PROPERTY-AND-AFFAIRS": {type: "PA", colour: "turquoise"},
+};
+
+export function formatCaseType(caseType, caseSubtype) {
+
+  const caseTypeUpper = caseType.toUpperCase();
+  const caseSubtypeUpper = caseSubtype ? caseSubtype.toUpperCase() : "";
+
+  switch(caseTypeUpper) {
+    case "EPA":
+      return {type: "EPA", colour: "brown"}
+    case "ORDER":
+      return {type: `Order/${caseSubtypeUpper}`, colour: null}
+    case "DIGITAL_LPA":
+    case "LPA":
+      return caseSubtypeFormatMap[caseSubtype.toUpperCase()] ?? {type: `${caseTypeUpper}/${caseSubtypeUpper}`, colour: null};
+  }
+  return {type: `${caseTypeUpper}/${caseSubtypeUpper}`, colour: null}
 }
