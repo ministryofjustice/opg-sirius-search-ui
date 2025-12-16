@@ -181,11 +181,11 @@ SearchResults.prototype.search = async function search() {
                 </a>
                   <p class="${CLASSES.link}">
                     ${caseTypeTagHTML}
-                  <a target="_self"  class="govuk-link" href="${caseUrl}">
+                  <a target="_self"  class="govuk-link govuk-!-margin-right-1" href="${caseUrl}">
                       ${caseTypeTagHTML ? result.case.uId : `${caseTypeDisplay.type} ${result.case.uId}`}
                     </a>
                     ${result.case.status ? `
-                      <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)} govuk-!-margin-left-1">
+                      <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)} ">
                         ${result.case.status}
                       </strong>
                     ` : ""}
