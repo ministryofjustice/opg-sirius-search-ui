@@ -7,7 +7,6 @@ const CLASSES = {
   item: "sirius-search__item",
   itemSummary: "sirius-search__item--summary",
   link: "sirius-search__link",
-  caseTypeTag: "app-govuk-tag",
 };
 
 function SearchResults($input, $form) {
@@ -169,26 +168,21 @@ SearchResults.prototype.search = async function search() {
 
           const caseTypeDisplay = formatCaseType(result.case.caseType, result.case.caseSubtype);
           const caseTypeTagHTML = caseTypeDisplay.colour
-            ? `<strong class="${CLASSES.caseTypeTag} govuk-tag--${caseTypeDisplay.colour} govuk-!-margin-right-1">
+            ? `<strong class="govuk-tag sirius-tag govuk-tag--${caseTypeDisplay.colour} govuk-!-margin-right-1">
                 ${caseTypeDisplay.type}
               </strong>`
             : "";
 
           return `
               <li class="${CLASSES.item}">
-                <a target="_self"  class="govuk-link" href="${caseUrl}">
-                  ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
-                </a>
+                <a target="_self"  class="govuk-link" href="${caseUrl}"><strong>${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}</strong></a>
+                [${result.personType}]
                   <p class="${CLASSES.link}">
                     ${caseTypeTagHTML}
                   <a target="_self"  class="govuk-link govuk-!-margin-right-1" href="${caseUrl}">
                       ${caseTypeTagHTML ? result.case.uId : `${caseTypeDisplay.type} ${result.case.uId}`}
                     </a>
-                    ${result.case.status ? `
-                      <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)} ">
-                        ${result.case.status}
-                      </strong>
-                    ` : ""}
+                    ${result.case.status ? `${result.case.status}` : ""}
                   </p>
                   <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                       <div class="govuk-summary-list__row">
