@@ -26,6 +26,10 @@
 .sirius-search__link {
   margin: 0.5rem 0;
   font-size: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .sirius-search .govuk-summary-list,
@@ -42,15 +46,14 @@
   float: right;
 }
 
-.app-govuk-tag {
-  display: inline-flex;
-  padding: 2px 4px 1px 4px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  gap: 10px;
-  font-size: 0.9rem;
+.sirius-tag {
   color: #0b0c0c;
+}
+
+.sirius-search__status {
+  display: block;
+  white-space: nowrap;
+  flex-basis: 100%;
 }
 
 .govuk-tag--grass-green {
