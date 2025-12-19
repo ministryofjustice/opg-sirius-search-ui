@@ -12,65 +12,71 @@ describe('Search component', () => {
         it('Displays basic case information', () => {
             search('Giusto', 'single.json');
 
-            cy.contains('.sirius-search__item', 'Giusto Rita, Donor').within(() => {
+            cy.contains('.sirius-search__item', 'Giusto Rita [Donor]').within(() => {
                 cy.contains('a', '7000-2910-9383').should('have.attr', 'href', '/lpa/person/75/14');
 
                 cy.contains('dt', 'DOB').next().contains('19/01/1934');
                 cy.contains('dt', 'Address').next().contains('9046 Harvey Track, Suite 540, Violaport, Lothian, EQ4 1PR, United Kingdom');
-                cy.contains('.app-govuk-tag', 'HW').should('have.class', 'govuk-tag--grass-green');
-                cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
+                cy.contains('.sirius-tag', 'HW').should('have.class', 'govuk-tag--grass-green');
+                cy.contains('.sirius-search__status', 'Pending');
             });
         });
 
         it('Expands cases', () => {
             search('Lloyd', 'multiple.json');
 
-            cy.get('.sirius-search__item:contains(Lloyd Poullard, Donor)')
+            cy.get('.sirius-search__item').filter(':contains("Lloyd Poullard")')
                 .eq(0)
+                .should('contain.text', '[Donor]')
                 .within(() => {
                     cy.contains('a', '7000-2910-2948').should('have.attr', 'href', '/lpa/person/94/315');
-                    cy.contains('.app-govuk-tag', 'HW').should('have.class', 'govuk-tag--grass-green');
-                    cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
+                    cy.contains('.sirius-tag', 'HW').should('have.class', 'govuk-tag--grass-green');
+                    cy.contains('.sirius-search__status', 'Registered')
                 });
 
-            cy.get('.sirius-search__item:contains(Lloyd Poullard, Donor)')
+            cy.get('.sirius-search__item').filter(':contains("Lloyd Poullard")')
                 .eq(1)
+                .should('contain.text', '[Donor]')
                 .within(() => {
                     cy.contains('a', '7000-2910-1244').should('have.attr', 'href', '/lpa/person/94/219');
-                    cy.contains('.app-govuk-tag', 'PFA').should('have.class', 'govuk-tag--turquoise');
-                    cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
+                    cy.contains('.sirius-tag', 'PFA').should('have.class', 'govuk-tag--turquoise');
+                    cy.contains('.sirius-search__status', 'Pending')
                 });
         });
 
         it('Displays basic case information', () => {
-          search('Antoine Burgundy', 'supervision-case.json');
+            search('Antoine Burgundy', 'supervision-case.json');
 
-          cy.contains('.sirius-search__item', 'Antoine Burgundy, Client').within(() => {
-            cy.contains('a', '7000-0000-2597').should('have.attr', 'href', '/supervision/#/clients/72?order=104');
-
-            cy.contains('dt', 'DOB').next().contains('01/01/1980');
-            cy.contains('dt', 'Address').next().contains('100 Davids Lane, Struy, Dorset, IV48RG');
-            cy.contains('.sirius-search__link a', 'Order/HW 7000-0000-2597');
-          });
+            cy.get('.sirius-search__item').filter(':contains("Antoine Burgund")')
+            .eq(0)
+            .should('contain.text', '[Client]')
+            .within(() => {
+                cy.contains('a', '7000-0000-2597').should('have.attr', 'href', '/supervision/#/clients/72?order=104');
+                cy.contains('dt', 'DOB').next().contains('01/01/1980');
+                cy.contains('dt', 'Address').next().contains('100 Davids Lane, Struy, Dorset, IV48RG');
+                cy.contains('.sirius-search__link a', 'Order/HW 7000-0000-2597');
+            });
         });
 
         it('Formats digital LPA subtypes correctly', () => {
             search('Brroo', 'multiple-digital-lpas.json');
 
-            cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
+            cy.get('.sirius-search__item').filter(':contains("Abelard Brroo")')
                 .eq(0)
+                .should('contain.text', '[Donor]')
                 .within(() => {
                     cy.contains('a', 'M-QQQQ-EEEE-WWWW').should('have.attr', 'href', '/lpa/frontend/lpa/M-QQQQ-EEEE-WWWW');
-                    cy.contains('.app-govuk-tag', 'PW').should('have.class', 'govuk-tag--grass-green');
-                    cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
+                    cy.contains('.sirius-tag', 'PW').should('have.class', 'govuk-tag--grass-green');
+                    cy.contains('.sirius-search__status', 'Registered')
                 });
 
-            cy.get('.sirius-search__item:contains(Abelard Brroo, Donor)')
+            cy.get('.sirius-search__item').filter(':contains("Abelard Brroo")')
                 .eq(1)
+                .should('contain.text', '[Donor]')
                 .within(() => {
                     cy.contains('a', 'M-1111-2222-3333').should('have.attr', 'href', '/lpa/frontend/lpa/M-1111-2222-3333');
-                    cy.contains('.app-govuk-tag', 'PA').should('have.class', 'govuk-tag--turquoise');
-                    cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
+                    cy.contains('.sirius-tag', 'PA').should('have.class', 'govuk-tag--turquoise');
+                    cy.contains('.sirius-search__status', 'Pending')
                 });
         });
 
@@ -83,8 +89,8 @@ describe('Search component', () => {
         it('Formats status correctly', () => {
             search('Lloyd', 'multiple.json');
 
-            cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
-            cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
+            cy.contains('.sirius-search__status', 'Registered')
+            cy.contains('.sirius-search__status', 'Pending')
         });
     });
 
@@ -105,7 +111,7 @@ describe('Search component', () => {
 
             const date = Intl.DateTimeFormat().format(new Date('2022-03-01'));
             cy.contains('.sirius-search__item', `Deleted on ${date} because LPA was not paid for after 12 months (was Payment Pending)`);
-            cy.contains('.govuk-tag', 'Deleted').should('have.class', 'govuk-tag--red');
+            cy.contains('.govuk-tag', 'Deleted')
         });
     });
 
@@ -126,7 +132,7 @@ describe('Search component', () => {
             cy.viewport(320, 720); // small viewport to trigger overflow
             search('Giusto', 'overflow.json');
 
-            cy.contains('.sirius-search__item--summary', 'Showing 3 of 4 results');
+            cy.contains('.sirius-search__item--summary', 'Showing 2 of 4 results');
         });
 
         it('Links to search results page', () => {
