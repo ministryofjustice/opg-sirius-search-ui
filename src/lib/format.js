@@ -22,32 +22,6 @@ export function formatAddress(address) {
   return formattedAddress.map(escapeHTML).join(", ");
 }
 
-const statusColourMap = {
-  Cancelled: "red",
-  "Cannot register": "red",
-  Draft: "purple",
-  "De-registered": "red",
-  Deleted: "red",
-  "Do not register": "red",
-  Expired: "red",
-  "In progress": "light-blue",
-  Perfect: "turquoise",
-  Pending: "blue",
-  "Payment Pending": "blue",
-  "Reduced Fees Pending": "blue",
-  Registered: "green",
-  Rejected: "red",
-  "Return - unpaid": "red",
-  Revoked: "red",
-  "Statutory waiting period": "yellow",
-  Withdrawn: "red",
-};
-
-export function statusColour(status) {
-  return statusColourMap[status] || "grey";
-}
-
-
 const caseSubtypeFormatMap = {
   "HW": {type: "HW", colour: "grass-green"},
   "PFA": {type: "PFA", colour: "turquoise"},
