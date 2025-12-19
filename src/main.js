@@ -176,19 +176,14 @@ SearchResults.prototype.search = async function search() {
 
           return `
               <li class="${CLASSES.item}">
-                <a target="_self"  class="govuk-link" href="${caseUrl}">
-                  ${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}, ${result.personType}
-                </a>
+                <a target="_self"  class="govuk-link" href="${caseUrl}">${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}</a>
+                [${result.personType}]
                   <p class="${CLASSES.link}">
                     ${caseTypeTagHTML}
                   <a target="_self"  class="govuk-link govuk-!-margin-right-1" href="${caseUrl}">
                       ${caseTypeTagHTML ? result.case.uId : `${caseTypeDisplay.type} ${result.case.uId}`}
                     </a>
-                    ${result.case.status ? `
-                      <strong class="govuk-tag govuk-tag--${statusColour(result.case.status)} ">
-                        ${result.case.status}
-                      </strong>
-                    ` : ""}
+                    ${result.case.status ? `(${result.case.status})` : ""}
                   </p>
                   <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
                       <div class="govuk-summary-list__row">
