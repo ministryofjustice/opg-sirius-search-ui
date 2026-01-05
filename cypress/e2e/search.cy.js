@@ -86,6 +86,23 @@ describe('Search component', () => {
             cy.contains('.govuk-tag', 'Registered').should('have.class', 'govuk-tag--green');
             cy.contains('.govuk-tag', 'Pending').should('have.class', 'govuk-tag--blue');
         });
+
+        it('Clears preview after clicking away', () => {
+            search('Giusto', 'single.json');
+
+            cy.contains('.sirius-search__item', 'Giusto Rita, Donor');
+
+            cy.get('#floating-box').click();
+
+            cy.get('.sirius-search').should('have.prop', 'hidden', true);
+            cy.get('.sirius-search').find('.sirius-search__item').should('not.exist');
+
+            cy.get('input').focus();
+
+            cy.get('.sirius-search').should('have.prop', 'hidden', true);
+            cy.get('.sirius-search').find('.sirius-search__item').should('not.exist');
+        });
+
     });
 
     describe('No results', () => {
