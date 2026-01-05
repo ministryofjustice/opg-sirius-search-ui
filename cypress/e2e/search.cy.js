@@ -9,6 +9,22 @@ const search = (term, fixture) => {
 
 describe('Search component', () => {
     describe('Search results', () => {
+        it('Normalises case-number queries before calling the API', () => {
+            cy.visit('./cypress/e2e/test.html');
+
+            cy.intercept('POST', '/lpa-api/v1/search/persons', (req) => {
+                const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+                expect(body.term).to.eq('7000-2910-9383');
+
+                req.reply({ fixture: 'single.json' });
+            }).as('caseLookup');
+
+            cy.get('input').type('7000 2910 9383');
+            cy.get('button').click();
+
+            cy.wait('@caseLookup');
+        });
+
         it('Displays basic case information', () => {
             search('Giusto', 'single.json');
 
