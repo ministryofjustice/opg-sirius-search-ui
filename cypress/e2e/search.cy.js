@@ -107,6 +107,14 @@ describe('Search component', () => {
             cy.contains('.sirius-search__item', `Deleted on ${date} because LPA was not paid for after 12 months (was Payment Pending)`);
             cy.contains('.govuk-tag', 'Deleted').should('have.class', 'govuk-tag--red');
         });
+
+        it('Falls back to standard no results when no deleted cases are found', () => {
+            cy.intercept('/lpa-api/v1/deleted-cases?uid=700000021994', '[]');
+
+            search('7000-0002-1994', 'none.json');
+
+            cy.contains('.sirius-search__item', 'No cases were found.');
+        });
     });
 
     describe('Summary', () => {
