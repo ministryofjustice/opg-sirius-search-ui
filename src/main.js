@@ -225,7 +225,7 @@ SearchResults.prototype.render = function render(innerHTML) {
 };
 
 SearchResults.prototype.resetPreview = function resetPreview() {
-  this.$container.innerHTML = "";
+  this.$container.replaceChildren();
   this.close();
 };
 
