@@ -95,33 +95,36 @@ SearchResults.prototype.search = async function search() {
   const uid = searchTerm.replace(/\D+/g, "");
   if (results.length === 0 && uid.match(/^\d{12}$/)) {
     const cases = await queryDeletedCases(uid);
-    const caseItem = cases[0];
 
-    const deletionDate = new Date(caseItem.deletedAt);
+    if (cases.length > 0) {
+      const caseItem = cases[0];
 
-    this.render(`
-            <ul class="${CLASSES.list}">
-              <li class="${CLASSES.item}">
-                  <strong>${caseItem.uId}</strong>
-                  <p class="${CLASSES.link}">
-                      Deleted on ${Intl.DateTimeFormat().format(
-                        deletionDate
-                      )} because ${caseItem.deletionReason} (was ${
-      caseItem.status
-    })
-                  </p>
-                  <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
-                      <div class="govuk-summary-list__row">
-                          <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
-                          <strong class="govuk-tag govuk-tag--red">
-                            Deleted
-                          </strong>
-                      </div>
-                  </dl>
-              </li>
-            </ul>
-        `);
-    return;
+      const deletionDate = new Date(caseItem.deletedAt);
+
+      this.render(`
+              <ul class="${CLASSES.list}">
+                <li class="${CLASSES.item}">
+                    <strong>${caseItem.uId}</strong>
+                    <p class="${CLASSES.link}">
+                        Deleted on ${Intl.DateTimeFormat().format(
+                          deletionDate
+                        )} because ${caseItem.deletionReason} (was ${
+        caseItem.status
+      })
+                    </p>
+                    <dl class="govuk-summary-list govuk-summary-list--no-border govuk-!-margin-bottom-0">
+                        <div class="govuk-summary-list__row">
+                            <dt class="govuk-summary-list__key govuk-!-padding-top-1 govuk-!-padding-bottom-1">Status:</dt>
+                            <strong class="govuk-tag govuk-tag--red">
+                              Deleted
+                            </strong>
+                        </div>
+                    </dl>
+                </li>
+              </ul>
+          `);
+      return;
+    }
   }
 
   if (results.length === 0) {
