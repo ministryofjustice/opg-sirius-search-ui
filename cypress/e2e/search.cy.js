@@ -112,7 +112,7 @@ describe('Search component', () => {
         it('Clears preview after clicking away', () => {
             search('Giusto', 'single.json');
 
-            cy.contains('.sirius-search__item', 'Giusto Rita, Donor');
+            cy.contains('.sirius-search__item', 'Giusto Rita [Donor]');
 
             cy.get('#floating-box').click();
 
