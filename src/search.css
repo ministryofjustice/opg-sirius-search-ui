@@ -41,3 +41,14 @@
 .sirius-search__link--view-all {
   float: right;
 }
+
+.sirius-tag {
+  color: #0b0c0c;
+}
+
+.govuk-tag--grass-green {
+  background: #85994b;
+}
+.govuk-tag--brown {
+  background: #b58840;
+}
