@@ -78,11 +78,16 @@ SearchResults.prototype.getConfig = function getConfig() {
 };
 
 SearchResults.prototype.search = async function search() {
-  const searchTerm = this.$input.value;
+  let searchTerm = this.$input.value;
+  const caseIdRegex = new RegExp(/^(\d{4})\s{1}(\d{4})\s{1}(\d{4})$/);
 
   if (searchTerm === "") {
     this.render("");
     return;
+  }
+
+  if (caseIdRegex.test(searchTerm)) {
+    searchTerm = searchTerm.replace(caseIdRegex, "$1-$2-$3");
   }
 
   const { results, anyResults, total } = await query(searchTerm);
