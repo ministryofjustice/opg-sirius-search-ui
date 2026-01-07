@@ -40,24 +40,24 @@ function SearchResults($input, $form) {
   this.$form.appendChild(this.$container);
 
   this.$input.addEventListener("focus", () => {
-    this.open();
+    this.resetPreview();
   });
 
   this.$input.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      this.close();
+      this.resetPreview();
     }
   });
 
   document.addEventListener("click", (e) => {
-    if (!$form.contains(e.target)) {
-      this.close();
+    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+      this.resetPreview();
     }
   });
 
   document.addEventListener("focusin", (e) => {
-    if (!$form.contains(e.target)) {
-      this.close();
+    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+      this.resetPreview();
     }
   });
 
@@ -219,6 +219,11 @@ SearchResults.prototype.render = function render(innerHTML) {
   this.open();
 
   this.$container.innerHTML = innerHTML;
+};
+
+SearchResults.prototype.resetPreview = function resetPreview() {
+  this.$container.replaceChildren();
+  this.close();
 };
 
 SearchResults.prototype.open = function close() {

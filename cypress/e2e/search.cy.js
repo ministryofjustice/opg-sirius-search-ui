@@ -108,6 +108,23 @@ describe('Search component', () => {
             cy.contains('(Registered)')
             cy.contains('(Pending)')
         });
+
+        it('Clears preview after clicking away', () => {
+            search('Giusto', 'single.json');
+
+            cy.contains('.sirius-search__item', 'Giusto Rita [Donor]');
+
+            cy.get('#floating-box').click();
+
+            cy.get('.sirius-search').should('have.prop', 'hidden', true);
+            cy.get('.sirius-search').find('.sirius-search__item').should('not.exist');
+
+            cy.get('input').focus();
+
+            cy.get('.sirius-search').should('have.prop', 'hidden', true);
+            cy.get('.sirius-search').find('.sirius-search__item').should('not.exist');
+        });
+
     });
 
     describe('No results', () => {
