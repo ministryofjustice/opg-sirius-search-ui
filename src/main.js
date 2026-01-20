@@ -56,7 +56,10 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("focusin", (e) => {
-    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+    const isSubmitButton = e.target.type === 'submit' && e.target.closest('form') === this.$form;
+    if (!this.$container.contains(e.target) &&
+      e.target !== this.$input &&
+      !isSubmitButton) {
       this.resetPreview();
     }
   });
