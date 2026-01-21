@@ -10,6 +10,8 @@ const CLASSES = {
 };
 
 function SearchResults($input, $form) {
+  console.log('SearchResults constructor called - NEW VERSION WITH TABINDEX FIX');
+
   if ($input.searchResults) {
     return $input.searchResults.search();
   }
@@ -19,6 +21,7 @@ function SearchResults($input, $form) {
   this.$input = $input;
   this.$form = $form;
   this.$submitButton = $form.querySelector('button[type="submit"]');
+  console.log('Submit button found:', this.$submitButton);
   this.config = this.getConfig();
 
   this.$container = document.createElement("div");
@@ -88,6 +91,7 @@ SearchResults.prototype.getConfig = function getConfig() {
 };
 
 SearchResults.prototype.search = async function search() {
+  console.log('search() called with input value:', this.$input.value);
   let searchTerm = this.$input.value;
   const caseIdRegex = new RegExp(/^(\d{4})\s{1}(\d{4})\s{1}(\d{4})$/);
 
