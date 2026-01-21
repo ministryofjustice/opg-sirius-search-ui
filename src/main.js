@@ -52,13 +52,19 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+    // Don't close if clicking on the container, input, or submit button
+    if (!this.$container.contains(e.target) &&
+      e.target !== this.$input &&
+      e.target !== this.$submitButton) {
       this.resetPreview();
     }
   });
 
   document.addEventListener("focusin", (e) => {
-    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+    // Don't close if focus moves to the container, input, or submit button
+    if (!this.$container.contains(e.target) &&
+      e.target !== this.$input &&
+      e.target !== this.$submitButton) {
       this.resetPreview();
     }
   });
