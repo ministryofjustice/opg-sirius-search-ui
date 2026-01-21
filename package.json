@@ -5,10 +5,10 @@
   "repository": "git@github.com:ministryofjustice/opg-sirius-search-ui.git",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:js && yarn build:css",
+    "build": "npm run build:js && npm run build:css",
     "build:js": "esbuild --bundle src/main.js --minify --outfile=dist/search.js --sourcemap --resolve-extensions=.mjs,.js",
     "build:css": "cp ./src/search.css ./dist/search.css",
-    "test": "yarn build && cypress open",
+    "test": "npm run build && cypress open",
     "prettier": "prettier --write ."
   },
   "devDependencies": {
