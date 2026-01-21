@@ -52,19 +52,21 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("click", (e) => {
-    // Don't close if clicking on the container, input, or submit button
+    // Don't close if clicking on the container, input, submit button, or anything inside submit button
     if (!this.$container.contains(e.target) &&
       e.target !== this.$input &&
-      e.target !== this.$submitButton) {
+      e.target !== this.$submitButton &&
+      !(this.$submitButton && this.$submitButton.contains(e.target))) {
       this.resetPreview();
     }
   });
 
   document.addEventListener("focusin", (e) => {
-    // Don't close if focus moves to the container, input, or submit button
+    // Don't close if focus moves to the container, input, submit button, or anything inside submit button
     if (!this.$container.contains(e.target) &&
       e.target !== this.$input &&
-      e.target !== this.$submitButton) {
+      e.target !== this.$submitButton &&
+      !(this.$submitButton && this.$submitButton.contains(e.target))) {
       this.resetPreview();
     }
   });
@@ -230,10 +232,16 @@ SearchResults.prototype.render = function render(innerHTML) {
 
   // Make container focusable and remove submit button from tab order when results are displayed
   if (innerHTML && innerHTML.trim() !== "") {
+    console.log('Setting tabindex="0" on container');
     this.$container.setAttribute("tabindex", "0");
     if (this.$submitButton) {
+      console.log('Setting tabindex="-1" on submit button');
       this.$submitButton.setAttribute("tabindex", "-1");
+    } else {
+      console.log('Submit button not found');
     }
+  } else {
+    console.log('No innerHTML, not setting tabindex');
   }
 };
 
