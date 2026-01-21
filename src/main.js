@@ -10,8 +10,6 @@ const CLASSES = {
 };
 
 function SearchResults($input, $form) {
-  console.log('SearchResults constructor called - NEW VERSION WITH TABINDEX FIX');
-
   if ($input.searchResults) {
     return $input.searchResults.search();
   }
@@ -21,7 +19,6 @@ function SearchResults($input, $form) {
   this.$input = $input;
   this.$form = $form;
   this.$submitButton = $form.querySelector('button[type="submit"]');
-  console.log('Submit button found:', this.$submitButton);
   this.config = this.getConfig();
 
   this.$container = document.createElement("div");
@@ -55,7 +52,6 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("click", (e) => {
-    // Don't close if clicking on the container, input, submit button, or anything inside submit button
     if (!this.$container.contains(e.target) &&
       e.target !== this.$input &&
       e.target !== this.$submitButton &&
@@ -65,7 +61,6 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("focusin", (e) => {
-    // Don't close if focus moves to the container, input, submit button, or anything inside submit button
     if (!this.$container.contains(e.target) &&
       e.target !== this.$input &&
       e.target !== this.$submitButton &&
@@ -91,7 +86,6 @@ SearchResults.prototype.getConfig = function getConfig() {
 };
 
 SearchResults.prototype.search = async function search() {
-  console.log('search() called with input value:', this.$input.value);
   let searchTerm = this.$input.value;
   const caseIdRegex = new RegExp(/^(\d{4})\s{1}(\d{4})\s{1}(\d{4})$/);
 
@@ -234,25 +228,17 @@ SearchResults.prototype.render = function render(innerHTML) {
 
   this.$container.innerHTML = innerHTML;
 
-  // Make container focusable and remove submit button from tab order when results are displayed
   if (innerHTML && innerHTML.trim() !== "") {
-    console.log('Setting tabindex="0" on container');
     this.$container.setAttribute("tabindex", "0");
     if (this.$submitButton) {
-      console.log('Setting tabindex="-1" on submit button');
       this.$submitButton.setAttribute("tabindex", "-1");
-    } else {
-      console.log('Submit button not found');
     }
-  } else {
-    console.log('No innerHTML, not setting tabindex');
   }
 };
 
 SearchResults.prototype.resetPreview = function resetPreview() {
   this.$container.replaceChildren();
 
-  // Remove container from tab order and restore submit button when results are hidden
   this.$container.setAttribute("tabindex", "-1");
   if (this.$submitButton) {
     this.$submitButton.removeAttribute("tabindex");
