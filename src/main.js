@@ -18,11 +18,12 @@ function SearchResults($input, $form) {
 
   this.$input = $input;
   this.$form = $form;
+  this.$submitButton = $form.querySelector('button[type="submit"]');
   this.config = this.getConfig();
 
   this.$container = document.createElement("div");
   this.$container.classList.add("govuk-body", CLASSES.container);
-  this.$container.setAttribute("tabindex", "0");
+  this.$container.setAttribute("tabindex", "-1"); // Initially not in tab order
 
   let inputBoundingBox = this.$input.getBoundingClientRect();
   if (this.config.attach) {
@@ -220,10 +221,25 @@ SearchResults.prototype.render = function render(innerHTML) {
   this.open();
 
   this.$container.innerHTML = innerHTML;
+
+  // Make container focusable and remove submit button from tab order when results are displayed
+  if (innerHTML && innerHTML.trim() !== "") {
+    this.$container.setAttribute("tabindex", "0");
+    if (this.$submitButton) {
+      this.$submitButton.setAttribute("tabindex", "-1");
+    }
+  }
 };
 
 SearchResults.prototype.resetPreview = function resetPreview() {
   this.$container.replaceChildren();
+
+  // Remove container from tab order and restore submit button when results are hidden
+  this.$container.setAttribute("tabindex", "-1");
+  if (this.$submitButton) {
+    this.$submitButton.removeAttribute("tabindex");
+  }
+
   this.close();
 };
 
