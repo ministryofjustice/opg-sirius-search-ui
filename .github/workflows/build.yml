@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Build dist asssets
-        run: yarn && yarn build
+        run: npm ci --ignore-scripts && npm run build
 
       - name: Cypress Tests
         uses: cypress-io/github-action@2ad32e649e4db26c07674ebae31a297601dbcbaf # v6.10.8
