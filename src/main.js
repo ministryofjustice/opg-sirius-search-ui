@@ -221,16 +221,13 @@ SearchResults.prototype.search = async function search() {
     `);
 
   this.resizeContainer();
+  this.$container.focus();
 };
 
 SearchResults.prototype.render = function render(innerHTML) {
   this.open();
 
   this.$container.innerHTML = innerHTML;
-
-  if (innerHTML && innerHTML.trim() !== "") {
-    this.$container.focus();
-  }
 };
 
 SearchResults.prototype.resetPreview = function resetPreview() {
