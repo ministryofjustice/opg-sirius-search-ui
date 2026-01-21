@@ -22,6 +22,7 @@ function SearchResults($input, $form) {
 
   this.$container = document.createElement("div");
   this.$container.classList.add("govuk-body", CLASSES.container);
+  this.$container.setAttribute("tabindex", "0");
 
   let inputBoundingBox = this.$input.getBoundingClientRect();
   if (this.config.attach) {
@@ -56,10 +57,7 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("focusin", (e) => {
-    const isSubmitButton = e.target.type === 'submit' && e.target.closest('form') === this.$form;
-    if (!this.$container.contains(e.target) &&
-      e.target !== this.$input &&
-      !isSubmitButton) {
+    if (!this.$container.contains(e.target) && e.target !== this.$input) {
       this.resetPreview();
     }
   });
