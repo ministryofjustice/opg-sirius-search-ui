@@ -23,7 +23,11 @@ function SearchResults($input, $form) {
 
   this.$container = document.createElement("div");
   this.$container.classList.add("govuk-body", CLASSES.container);
-  this.$container.setAttribute("tabindex", "-1"); // Initially not in tab order
+  this.$container.setAttribute("tabindex", "0");
+
+  if (this.$submitButton) {
+    this.$submitButton.setAttribute("tabindex", "-1");
+  }
 
   let inputBoundingBox = this.$input.getBoundingClientRect();
   if (this.config.attach) {
@@ -227,23 +231,10 @@ SearchResults.prototype.render = function render(innerHTML) {
   this.open();
 
   this.$container.innerHTML = innerHTML;
-
-  if (innerHTML && innerHTML.trim() !== "") {
-    this.$container.setAttribute("tabindex", "0");
-    if (this.$submitButton) {
-      this.$submitButton.setAttribute("tabindex", "-1");
-    }
-  }
 };
 
 SearchResults.prototype.resetPreview = function resetPreview() {
   this.$container.replaceChildren();
-
-  this.$container.setAttribute("tabindex", "-1");
-  if (this.$submitButton) {
-    this.$submitButton.removeAttribute("tabindex");
-  }
-
   this.close();
 };
 
