@@ -18,10 +18,12 @@ function SearchResults($input, $form) {
 
   this.$input = $input;
   this.$form = $form;
+  this.$submitButton = $form.querySelector('button[type="submit"]');
   this.config = this.getConfig();
 
   this.$container = document.createElement("div");
   this.$container.classList.add("govuk-body", CLASSES.container);
+  this.$container.setAttribute("tabindex", "0");
 
   let inputBoundingBox = this.$input.getBoundingClientRect();
   if (this.config.attach) {
@@ -50,13 +52,19 @@ function SearchResults($input, $form) {
   });
 
   document.addEventListener("click", (e) => {
-    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+    if (!this.$container.contains(e.target) &&
+      e.target !== this.$input &&
+      e.target !== this.$submitButton &&
+      !(this.$submitButton && this.$submitButton.contains(e.target))) {
       this.resetPreview();
     }
   });
 
   document.addEventListener("focusin", (e) => {
-    if (!this.$container.contains(e.target) && e.target !== this.$input) {
+    if (!this.$container.contains(e.target) &&
+      e.target !== this.$input &&
+      e.target !== this.$submitButton &&
+      !(this.$submitButton && this.$submitButton.contains(e.target))) {
       this.resetPreview();
     }
   });
@@ -213,6 +221,7 @@ SearchResults.prototype.search = async function search() {
     `);
 
   this.resizeContainer();
+  this.$container.focus();
 };
 
 SearchResults.prototype.render = function render(innerHTML) {
