@@ -176,6 +176,12 @@ SearchResults.prototype.search = async function search() {
         ${results
       .map(
         (result) => {
+          const personUrl = result.case.caseType === "DIGITAL_LPA"
+            ? `/lpa/frontend/lpa/${result.case.uId}`
+            : result.case.caseType.toLowerCase() === "order"
+              ? `/supervision/#/clients/${result.id}?order=${result.case.id}`
+              : `/lpa/person/${result.id}`;
+          
           const caseUrl = result.case.caseType === "DIGITAL_LPA"
             ? `/lpa/frontend/lpa/${result.case.uId}`
             : result.case.caseType.toLowerCase() === "order"
@@ -191,7 +197,7 @@ SearchResults.prototype.search = async function search() {
 
           return `
               <li class="${CLASSES.item}">
-                <a target="_self"  class="govuk-link" href="${caseUrl}"><strong>${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}</strong></a>
+                <a target="_self"  class="govuk-link" href="${personUrl}"><strong>${escapeHTML(result.firstname)} ${escapeHTML(result.surname)}</strong></a>
                 [${result.personType}]
                   <p class="${CLASSES.link}">
                     ${caseTypeTagHTML}
