@@ -160,20 +160,20 @@ describe('Search component', () => {
         it('Displays count for single results', () => {
             search('Giusto', 'single.json');
 
-            cy.contains('.sirius-search__item--summary', 'Showing 1 of 3 results');
+            cy.contains('.sirius-search__item--summary', 'Showing 1 of 3 cases');
         });
 
         it('Increases count for multiple results', () => {
             search('Giusto', 'multiple.json');
 
-            cy.contains('.sirius-search__item--summary', 'Showing 2 of 2 results');
+            cy.contains('.sirius-search__item--summary', 'Showing 2 of 2 cases');
         });
 
         it('Decreases count when results overflow', () => {
             cy.viewport(320, 720); // small viewport to trigger overflow
             search('Giusto', 'overflow.json');
 
-            cy.contains('.sirius-search__item--summary', 'Showing 2 of 4 results');
+            cy.contains('.sirius-search__item--summary', 'Showing 2 of 4 cases');
         });
 
         it('Links to search results page', () => {
