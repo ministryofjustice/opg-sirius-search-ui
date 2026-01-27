@@ -168,7 +168,7 @@ SearchResults.prototype.search = async function search() {
 
   this.render(`
         <div class="${CLASSES.item} ${CLASSES.itemSummary}">
-            Showing <strong data-id="sirius-search-summary-count">${results.length}</strong> of <strong>${total}</strong> results
+            Showing <strong data-id="sirius-search-summary-count">${results.length}</strong> of <strong>${total}</strong> cases
             <a class="govuk-link sirius-search__link--view-all" href="/lpa/frontend/search?term=${escapeHTML(searchTerm)}" target="_self">View all</a>
         </div>
         <hr class="govuk-section-break govuk-section-break--visible" />
