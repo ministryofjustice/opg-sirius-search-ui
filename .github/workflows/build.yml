@@ -24,7 +24,7 @@ jobs:
         run: npm ci --ignore-scripts && npm run build
 
       - name: Cypress Tests
-        uses: cypress-io/github-action@8a35f965fbd13e3b18d9fb3bdc5f50ae2f4a5e76 # v7.1.0
+        uses: cypress-io/github-action@84d178e4bbce871e23f2ffa3085898cde0e4f0ec # v7.1.2
         with:
           browser: chrome
 
@@ -46,12 +46,12 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@19b2f06db2b6f5108140aeb04014ef02b648f789 # v4.31.11
+        uses: github/codeql-action/init@6bc82e05fd0ea64601dd4b465378bbcf57de0314 # v4.32.1
         with:
           languages: javascript
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@19b2f06db2b6f5108140aeb04014ef02b648f789 # v4.31.11
+        uses: github/codeql-action/analyze@6bc82e05fd0ea64601dd4b465378bbcf57de0314 # v4.32.1
 
 
   create-tag:
