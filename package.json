@@ -17,5 +17,8 @@
   },
   "peerDependencies": {
     "govuk-frontend": "^4.4.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "opg-sirius-search-ui": "github:ministryofjustice/opg-sirius-search-ui#v1.78.18"
   }
 }
