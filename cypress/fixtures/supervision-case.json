@@ -78,7 +78,7 @@
     }
   ],
   "aggregations": {
-    "personTypes": {
+    "personType": {
       "Client": 1
     }
   },

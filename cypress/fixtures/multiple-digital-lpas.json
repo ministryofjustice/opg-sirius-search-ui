@@ -19,7 +19,7 @@
         }
     ],
     "aggregations": {
-        "personTypes": {
+        "personType": {
             "Donor": 2
         }
     }

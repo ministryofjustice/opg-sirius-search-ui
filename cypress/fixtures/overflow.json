@@ -49,7 +49,7 @@
         }
     ],
     "aggregations": {
-        "personTypes": {
+        "personType": {
             "Donor": 3,
             "Attorney": 1
         }

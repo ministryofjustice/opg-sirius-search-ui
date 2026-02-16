@@ -42,7 +42,7 @@ export async function query(term) {
 
   let totalItems = 0
   if (aggregations != null) {
-    totalItems = Object.values(aggregations.personTypes).reduce((a, b) => a + b, 0);
+    totalItems = Object.values(aggregations.personType).reduce((a, b) => a + b, 0);
   }
 
   return {
