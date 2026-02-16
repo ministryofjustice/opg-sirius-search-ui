@@ -1,5 +1,5 @@
 {
-    "total": { "count": 3 },
+    "total": { "count": 1 },
     "results": [
         {
             "id": 75,
@@ -18,5 +18,10 @@
             ],
             "cases": [{ "id": 14, "uId": "7000-2910-9383", "caseType": "LPA", "caseSubtype": "hw", "status": "Pending" }]
         }
-    ]
+    ],
+    "aggregations": {
+        "personTypes": {
+            "Donor": 1
+        }
+    }
 }

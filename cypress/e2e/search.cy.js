@@ -60,7 +60,7 @@ describe('Search component', () => {
                 });
         });
 
-        it('Displays basic case information', () => {
+        it('Displays basic case information supervision case', () => {
             search('Antoine Burgundy', 'supervision-case.json');
 
             cy.get('.sirius-search__item').filter(':contains("Antoine Burgund")')
@@ -160,7 +160,7 @@ describe('Search component', () => {
         it('Displays count for single results', () => {
             search('Giusto', 'single.json');
 
-            cy.contains('.sirius-search__item--summary', 'Showing 1 of 3 cases');
+            cy.contains('.sirius-search__item--summary', 'Showing 1 of 1 cases');
         });
 
         it('Increases count for multiple results', () => {

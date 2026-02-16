@@ -39,7 +39,11 @@ export async function query(term) {
     return agg;
   }, []);
 
-  const totalItems = Object.values(results.aggregations.personTypes).reduce((a, b) => a + b, 0);
+
+  let totalItems = 0
+  if (aggregations != null) {
+    totalItems = Object.values(aggregations.personTypes).reduce((a, b) => a + b, 0);
+  }
 
   return {
     results: splitResults,
