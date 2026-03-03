@@ -288,7 +288,12 @@ document.addEventListener("submit", async (e) => {
     return;
   }
 
+  e.preventDefault();
+
+  if ($input.value.trim() === "") {
+    return;
+  }
+
   new SearchResults($input, $form);
 
-  e.preventDefault();
 });
