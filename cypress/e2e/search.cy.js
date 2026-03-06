@@ -7,6 +7,17 @@ const search = (term, fixture) => {
     cy.get('button').click();
 };
 
+describe('Search results page', () => {
+  it('Does not show preview when already on the search results page', () => {
+    cy.visit('./cypress/e2e/search-results.html');
+
+    cy.get('input').type('Giusto');
+    cy.get('button').click();
+
+    cy.url().should('include', '?term=Giusto');
+  });
+});
+
 describe('Search component', () => {
     describe('Search results', () => {
         it('Normalises case-number queries before calling the API', () => {

@@ -288,12 +288,16 @@ document.addEventListener("submit", async (e) => {
     return;
   }
 
-  e.preventDefault();
-
   if ($input.value.trim() === "") {
+    e.preventDefault();
     return;
   }
 
-  new SearchResults($input, $form);
+  const formAction = new URL($form.action).pathname;
+  if (window.location.pathname === formAction) {
+    return;
+  }
 
+  e.preventDefault();
+  new SearchResults($input, $form);
 });
