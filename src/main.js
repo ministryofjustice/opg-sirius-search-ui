@@ -300,6 +300,7 @@ document.addEventListener("submit", async (e) => {
       return;
     }
   }
+
   e.preventDefault();
   new SearchResults($input, $form);
 });
