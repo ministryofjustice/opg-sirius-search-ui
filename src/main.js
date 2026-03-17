@@ -293,11 +293,13 @@ document.addEventListener("submit", async (e) => {
     return;
   }
 
-  const formAction = new URL($form.action).pathname;
-  if (window.location.pathname === formAction) {
-    return;
+  const hasExplicitAction = $form.hasAttribute("action");
+  if (hasExplicitAction) {
+    const formAction = new URL($form.action).pathname;
+    if (window.location.pathname === formAction) {
+      return;
+    }
   }
-
   e.preventDefault();
   new SearchResults($input, $form);
 });
