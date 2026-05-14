@@ -17,5 +17,10 @@
                 { "id": 78, "uId": "M-1111-2222-3333", "caseType": "DIGITAL_LPA", "caseSubtype": "property-and-affairs", "status": "Pending" }
             ]
         }
-    ]
+    ],
+    "aggregations": {
+        "personType": {
+            "Donor": 2
+        }
+    }
 }
