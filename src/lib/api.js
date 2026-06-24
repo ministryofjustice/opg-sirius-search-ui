@@ -36,14 +36,18 @@ export async function query(term) {
       agg.push({ ...result, case: caseitem });
     });
 
-    total.count += result.cases.length - 1;
-
     return agg;
   }, []);
 
+
+  let totalItems = 0
+  if (aggregations != null) {
+    totalItems = Object.values(aggregations.personType).reduce((a, b) => a + b, 0);
+  }
+
   return {
     results: splitResults,
-    total: total.count,
+    total: totalItems,
     anyResults: aggregations && "personType" in aggregations,
   };
 }
