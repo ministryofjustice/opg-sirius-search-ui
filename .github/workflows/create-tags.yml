@@ -20,7 +20,7 @@ jobs:
 
       - name: "Generate semver tag and release"
         id: semver_tag
-        uses: ministryofjustice/opg-github-actions/actions/semver@939ca6ddfc2bafefa48b0730ea0268bd75a25876 # v4.9.1
+        uses: ministryofjustice/opg-github-actions/actions/semver@722a5f955424aaba01e9ca43d68390cd4048d6e1 # v4.10.2
         with:
           create_release: false
           default_bump: ${{ github.event_name == 'workflow_dispatch' && 'none' || 'minor' }}
