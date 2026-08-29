@@ -47,5 +47,11 @@
             ],
             "cases": [{ "id": 14, "uId": "7000-2910-9383", "caseType": "LPA", "caseSubtype": "hw", "status": "Pending" }]
         }
-    ]
+    ],
+    "aggregations": {
+        "personType": {
+            "Donor": 3,
+            "Attorney": 1
+        }
+    }
 }
